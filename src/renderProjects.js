@@ -15,7 +15,7 @@ export function renderTodos(project){
    const ul = create("ul", "todo-list", "todo-list");
    
    for(let i=0; i<project["todos"].length; i++){
-      const li =  create("li", `todo ${project["todos"][i]["priority"]}`);
+      const li =  create("li", `todo priority-${project["todos"][i]["priority"]}`);
 
       const details = create("details");
       const summary = create("summary");

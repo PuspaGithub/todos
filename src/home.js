@@ -11,7 +11,7 @@ const projects = [
             title: "todo-1",
             description: "",
             dueDate: "2026-10-04",
-            priority: "high",
+            priority: "medium",
             done: false,
          },
          {
@@ -49,6 +49,7 @@ const projects = [
 
 export function loadHome() {
    createProjects(projects);
+   renderTodos(projects[0]);
 
    const projectList = document.getElementById("project-list");
    projectList.addEventListener("click", (e) => {
@@ -63,6 +64,5 @@ export function loadHome() {
 
       renderTodos(project)
    })
-
    
 }
