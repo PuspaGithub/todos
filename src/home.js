@@ -1,4 +1,5 @@
 import { createProjects } from "./createProjects.js";
+import { renderTodos } from "./renderProjects.js";
 
 const projects = [
    {
@@ -45,8 +46,23 @@ const projects = [
    },
 ];
 
-// const renderProject = renderProjects(projects)
 
 export function loadHome() {
    createProjects(projects);
+
+   const projectList = document.getElementById("project-list");
+   projectList.addEventListener("click", (e) => {
+      const button = e.target.closest(".project-btn");
+      if(!button) return;
+
+      const id = button.dataset.projectId;
+      const project = projects.find((p) => p.id === id);
+
+      document.querySelectorAll(".project-btn").forEach((b) => b.classList.remove("active"));
+      button.classList.add("active");
+
+      renderTodos(project)
+   })
+
+   
 }
