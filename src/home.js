@@ -1,5 +1,5 @@
-import { createProjects } from "./createProjects.js";
-import { renderTodos } from "./renderProjects.js";
+import { renderProjects } from "./renderProjects.js";
+import { renderTodos } from "./renderTodos.js";
 
 const projects = [
    {
@@ -48,8 +48,8 @@ const projects = [
 
 
 export function loadHome() {
-   createProjects(projects);
-   renderTodos(projects[0]);
+   renderProjects(projects); // renders porjects
+   renderTodos(projects[0]); // runs or shows the todos of 1st project on the list when DOM loads
 
    const projectList = document.getElementById("project-list");
    projectList.addEventListener("click", (e) => {
@@ -62,7 +62,42 @@ export function loadHome() {
       document.querySelectorAll(".project-btn").forEach((b) => b.classList.remove("active"));
       button.classList.add("active");
 
-      renderTodos(project)
+      renderTodos(project);
    })
    
+   const newProjectBtn = document.getElementById("new-project-btn");
+   const projectDialog = document.getElementById("project-dialog");
+   const cancelProject = document.getElementById("cancel-project");
+   const projectForm = document.getElementById("project-form");
+   const projectInput = document.getElementById("project-input");
+
+   newProjectBtn.addEventListener("click", () => {
+      projectDialog.showModal();
+   });
+
+   cancelProject.addEventListener("click", () => {
+      projectDialog.close();
+      projectForm.reset();
+   })
+
+   projectForm.addEventListener("submit", () => {
+      projects.push(
+         {
+            id: crypto.randomUUID(),
+            name: projectInput.value.trim(),
+            todos: []
+         } 
+      )
+      renderProjects(projects);
+      projectForm.reset();
+   });
+   
+   const newTodoBtn = document.getElementById("new-todo-btn");
+   const todoDialog = document.getElementById("todo-dialog");
+
+   newTodoBtn.addEventListener("click", () => {
+      todoDialog.showModal();
+   })
+   
+
 }

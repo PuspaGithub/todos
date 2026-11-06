@@ -1,37 +1,28 @@
 import { create } from "./create.js";
 
-export function renderTodos(project){
-   const main = document.getElementById("main");
-   main.textContent = '';
+export function renderProjects(projects){
+   const projectList = document.getElementById("project-list");
+   projectList.textContent = "";
 
-   const header = create("header", "main-header");
-   
-   const h2 = create("h2", "", "project-title", project["name"]);
+   for(let i = 0; i< projects.length; i++){
+      let noOfTodos = (projects[i]["todos"].length) ? projects[i]["todos"].length : "0";
+      const li = create("li");
 
-   const button = create("button", "btn btn-primary","new-todo-btn", "+ Add Todo")
+      const button = create("button", "project-btn");
+      button.dataset.projectId = projects[i].id;
+      if(i === 0){
+         button.classList.add("active");
+      }
 
-   header.append(h2, button);
+      const span1 = create("span", "project-name", "", projects[i]["name"]);
+      const span2 = create("span", "count", "", noOfTodos);
 
-   const ul = create("ul", "todo-list", "todo-list");
-   
-   for(let i=0; i<project["todos"].length; i++){
-      const li =  create("li", `todo priority-${project["todos"][i]["priority"]}`);
+      button.append(span1, span2);
+      li.append(button);
 
-      const details = create("details");
-      const summary = create("summary");
-      const input = create("input", "todo-check");
-      input.type = "checkbox";
-      const span = create("span", "todo-title", "", `${project["todos"][i]["title"]}`);
-      const time = create("time", "todo-date", "", `${project["todos"][i]["dueDate"]}`);
-      summary.append(input, span, time);
-      details.append(summary)
-      li.append(details);
-      ul.append(li);
+      projectList.append(li);
    }
 
-   main.append(header, ul);
+   return projectList;
 
-
-   return main;
-
-}
+};
