@@ -1,103 +1,38 @@
-import { renderProjects } from "./renderProjects.js";
-import { renderTodos } from "./renderTodos.js";
+import { renderProjects, renderActive } from "./renderProjects.js";
+import {showModal, closeModal, addProject} from "./projectAddDialog.js";
+import {handleTodoForm, showTodoModal, cancelTodoModal} from "./handleTodoForm.js"
 
-const projects = [
-   {
-      id: "default",
-      name: "Inbox",
-      todos: [
-         {
-            id: "t1",
-            title: "todo-1",
-            description: "",
-            dueDate: "2026-10-04",
-            priority: "medium",
-            done: false,
-         },
-         {
-            id: "t1",
-            title: "todo-1",
-            description: "",
-            dueDate: "2026-10-04",
-            priority: "high",
-            done: false,
-         },
-      ],
-   },
-   {
-      id: "id-01",
-      name: "University",
-      todos: [
-         {
-            id: "t1",
-            title: "todo-1",
-            description: "",
-            dueDate: "2026-10-04",
-            priority: "high",
-            done: false,
-         },
-      ],
-   },
-   {
-      id: "id-02",
-      name: "Grocery",
-      todos: [
-      ],
-   },
-];
+const projects = [];
 
+// Getting Elements for the projects ADD, Cancel and show dialog's function
+const newProjectBtn = document.getElementById("new-project-btn");
+const cancelProject = document.getElementById("cancel-project");
+const projectForm = document.getElementById("project-form");
 
 export function loadHome() {
    renderProjects(projects); // renders porjects
-   renderTodos(projects[0]); // runs or shows the todos of 1st project on the list when DOM loads
+   //renderTodos(projects[0]); // runs or shows the todos of 1st project on the list when DOM loads
 
+   // Adds active class to the pressed project on the sidebar
    const projectList = document.getElementById("project-list");
-   projectList.addEventListener("click", (e) => {
-      const button = e.target.closest(".project-btn");
-      if(!button) return;
+   projectList.addEventListener("click", (e) => {renderActive(e, projects)})
 
-      const id = button.dataset.projectId;
-      const project = projects.find((p) => p.id === id);
-
-      document.querySelectorAll(".project-btn").forEach((b) => b.classList.remove("active"));
-      button.classList.add("active");
-
-      renderTodos(project);
-   })
+   // This is for the adding Project's form
+   newProjectBtn.addEventListener("click", () => {showModal()});
+   cancelProject.addEventListener("click", () => {closeModal()})
+   projectForm.addEventListener("submit", () => {addProject(projects)});
    
-   const newProjectBtn = document.getElementById("new-project-btn");
-   const projectDialog = document.getElementById("project-dialog");
-   const cancelProject = document.getElementById("cancel-project");
-   const projectForm = document.getElementById("project-form");
-   const projectInput = document.getElementById("project-input");
 
-   newProjectBtn.addEventListener("click", () => {
-      projectDialog.showModal();
-   });
+   // Gets whatever is inside the main tag and we are using it to add event listner in add todo button since the button does not have any id to select so we are using even deligation
+   const main = document.getElementById("main");
+   main.addEventListener("click", (e) => {showTodoModal(e, projects)});
 
-   cancelProject.addEventListener("click", () => {
-      projectDialog.close();
-      projectForm.reset();
-   })
-
-   projectForm.addEventListener("submit", () => {
-      projects.push(
-         {
-            id: crypto.randomUUID(),
-            name: projectInput.value.trim(),
-            todos: []
-         } 
-      )
-      renderProjects(projects);
-      projectForm.reset();
-   });
+   // Close the todo dialog when cancel is pressed.
+   const cancelTodo = document.getElementById("cancel-todo");
+   cancelTodo.addEventListener("click", () => {cancelTodoModal()})
    
-   const newTodoBtn = document.getElementById("new-todo-btn");
-   const todoDialog = document.getElementById("todo-dialog");
-
-   newTodoBtn.addEventListener("click", () => {
-      todoDialog.showModal();
-   })
-   
+   // handels the Todo form not project form and store the data and renders the todos
+   const form = document.getElementById("todo-form");
+   form.addEventListener("submit", () => { handleTodoForm(projects, form)})
 
 }
