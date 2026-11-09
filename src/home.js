@@ -10,12 +10,12 @@ const cancelProject = document.getElementById("cancel-project");
 const projectForm = document.getElementById("project-form");
 
 export function loadHome() {
-   renderProjects(projects); // renders porjects
+   renderProjects(localStorage); // renders porjects
    //renderTodos(projects[0]); // runs or shows the todos of 1st project on the list when DOM loads
 
    // Adds active class to the pressed project on the sidebar
    const projectList = document.getElementById("project-list");
-   projectList.addEventListener("click", (e) => {renderActive(e, projects)})
+   projectList.addEventListener("click", (e) => {renderActive(e, localStorage)})
 
    // This is for the adding Project's form
    newProjectBtn.addEventListener("click", () => {showModal()});
