@@ -16,8 +16,14 @@ export function closeModal(){
    projectForm.reset();
 }
 
-export function addProject(){
-   localStorage.setItem("projects", JSON.stringify({id: crypto.randomUUID(),name: projectInput.value.trim(),todos: []}))
-   renderProjects(localStorage);
+export function addProject(projects){
+   //localStorage.setItem("projects", JSON.stringify({id: crypto.randomUUID(),name: projectInput.value.trim(),todos: []}))
+   projects.push({
+      id: crypto.randomUUID(),
+      name: projectInput.value.trim(),
+      todos: []
+   });
+   localStorage.setItem("projects", JSON.stringify(projects))
+   renderProjects(projects);
    projectForm.reset();
 }

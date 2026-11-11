@@ -2,7 +2,7 @@ import { renderProjects, renderActive } from "./renderProjects.js";
 import {showModal, closeModal, addProject} from "./projectAddDialog.js";
 import {handleTodoForm, showTodoModal, cancelTodoModal} from "./handleTodoForm.js"
 
-const projects = [];
+const projects = JSON.parse(localStorage.getItem("projects")) ?? [];
 
 // Getting Elements for the projects ADD, Cancel and show dialog's function
 const newProjectBtn = document.getElementById("new-project-btn");
@@ -10,12 +10,12 @@ const cancelProject = document.getElementById("cancel-project");
 const projectForm = document.getElementById("project-form");
 
 export function loadHome() {
-   renderProjects(localStorage); // renders porjects
+   renderProjects(projects) // renders porjects
    //renderTodos(projects[0]); // runs or shows the todos of 1st project on the list when DOM loads
 
    // Adds active class to the pressed project on the sidebar
    const projectList = document.getElementById("project-list");
-   projectList.addEventListener("click", (e) => {renderActive(e, localStorage)})
+   projectList.addEventListener("click", (e) => {renderActive(e, projects)})
 
    // This is for the adding Project's form
    newProjectBtn.addEventListener("click", () => {showModal()});
