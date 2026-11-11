@@ -31,6 +31,7 @@ export function handleTodoForm(projects, form){
    for(let i=0; i<projects.length; i++){
       if(projects[i]["name"] === f.project.value){
          projects[i]["todos"].push(todo);
+         localStorage.setItem("projects", JSON.stringify(projects))
       }
    }
    form.reset();
