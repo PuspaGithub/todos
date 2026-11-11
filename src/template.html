@@ -1,81 +1,94 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>ToDo</title>
-</head>
-<body>
-   
-   <div class="app">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ToDo</title>
+  </head>
+  <body>
+    <div class="app">
       <!-- SIDEBAR: All Projects -->
       <aside class="sidebar">
-         <h1 class="logo">Todo</h1>
+        <h1 class="logo">Todo</h1>
 
-         <nav>
-            <h2 class="sidebar-heading">Projects</h2>
-            <!-- Js renders one <li> per project. Add .active to the selected one. -->
-            <ul class="project-list" id="project-list">
-               <!-- Projects created by the user goes here -->
-            </ul>
-         </nav>   
+        <nav>
+          <h2 class="sidebar-heading">Projects</h2>
+          <!-- Js renders one <li> per project. Add .active to the selected one. -->
+          <ul class="project-list" id="project-list">
+            <!-- Projects created by the user goes here -->
+          </ul>
+        </nav>
 
-         <button class="btn btn-ghost" id="new-project-btn">+ New Project</button>
+        <button class="btn btn-ghost" id="new-project-btn">
+          + New Project
+        </button>
       </aside>
 
       <!-- MAIN: Todos in the selected project -->
-      <main class="main" id="main">
+      <main class="main" id="main"></main>
+    </div>
 
-      </main>
-   </div>
-
-   <!-- ============ DIALOG: new project ============ -->
-   <dialog id="todo-dialog">
+    <!-- ============ DIALOG: new project ============ -->
+    <dialog id="todo-dialog">
       <form method="dialog" class="dialog-form" id="todo-form">
-         <h3>New Todo</h3>
-         <label>Title 
-            <input type="text" name="title" required />
-         </label>
-         <label>Description
-            <textarea name="description" rows="3"></textarea>
-         </label>
-         <div class="row">
-            <label>Due Date
-               <input type="date" name="dueDate" required />
-            </label>
-            <label>Priority
-               <select name="priority">
-                  <option value="low">Low</option>
-                  <option value="medium">Medium</option>
-                  <option value="high">High</option>
-               </select>
-            </label>
-         </div>
-         <label>Project
-            <select name="project" id="todo-project-select">
-               
+        <h3>New Todo</h3>
+        <label
+          >Title
+          <input type="text" name="title" required />
+        </label>
+        <label
+          >Description
+          <textarea name="description" rows="3"></textarea>
+        </label>
+        <div class="row">
+          <label
+            >Due Date
+            <input type="date" name="dueDate" required />
+          </label>
+          <label
+            >Priority
+            <select name="priority">
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
             </select>
-         </label>
-         <div class="actions">
-            <button type="button" value="cancel" class="btn btn-ghost" id="cancel-todo">Cancel</button>
-            <button class="btn btn-primary" type="submit" id="submit-todo">Add Todos</button>
-         </div>
+          </label>
+        </div>
+        <label
+          >Project
+          <select name="project" id="todo-project-select"></select>
+        </label>
+        <div class="actions">
+          <button
+            type="button"
+            value="cancel"
+            class="btn btn-ghost"
+            id="cancel-todo"
+          >
+            Cancel
+          </button>
+          <button class="btn btn-primary" type="submit" id="submit-todo">
+            Add Todos
+          </button>
+        </div>
       </form>
-   </dialog>
+    </dialog>
 
-   <!-- ============ DIALOG: new project ============ -->
-   <dialog id="project-dialog">
+    <!-- ============ DIALOG: new project ============ -->
+    <dialog id="project-dialog">
       <form method="dialog" id="project-form" class="dialog-form">
-         <h3>New project</h3>
-         <label>Name
-            <input type="text" name="name" id="project-input" required />
-         </label>
-         <div class="actions">
-            <button type="button" class="btn btn-ghost" id="cancel-project">Cancel</button>
-            <button type="submit" class="btn btn-primary">Create</button>
-         </div>
+        <h3>New project</h3>
+        <label
+          >Name
+          <input type="text" name="name" id="project-input" required />
+        </label>
+        <div class="actions">
+          <button type="button" class="btn btn-ghost" id="cancel-project">
+            Cancel
+          </button>
+          <button type="submit" class="btn btn-primary">Create</button>
+        </div>
       </form>
-   </dialog>
-
-</body>
+    </dialog>
+  </body>
 </html>
